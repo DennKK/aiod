@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Cards</title>
+    <link rel="stylesheet" href="/css/cards.css">
+</head>
+<body>
+<h1>AI Odyssey</h1>
+<div th:if="${#lists.isEmpty(cards)}">
+    <p>No cards available yet.</p>
+</div>
+<div>
+    <h3>Enter tags</h3>
+    <form action="#" th:action="@{/cards}" method="get">
+        <p>Tags: <input type="text" name="tags"/></p>
+        <p><input type="submit" value="Filter"/></p>
+    </form>
+    <hr>
+</div>
+<div th:each="card : ${cards}" th:unless="${#lists.isEmpty(cards)}">
+    <div class="card">
+        <p><b>Name:</b> <span th:text="${card.name}"></span></p>
+        <p><b>Preview:</b> <span th:text="${card.preview}"></span></p>
+        <p><b>Tags:</b>
+            <span th:each="tag : ${card.tags}">
+                <span th:text="${tag}"></span>
+            </span>
+        </p>
+        <p><b>Link:</b> <span class="link" th:text="${card.link}"></span></p>
+        <p><a th:href="@{'/card/' + ${card.id}}">Read more</a></p>
+    </div>
+</div>
+</body>
+</html>

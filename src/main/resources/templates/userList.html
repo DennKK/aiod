@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>User list</title>
+    <link rel="stylesheet" href="/css/userList.css">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Roles</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}">DefaultUsername</td>
+        <td th:text="${#strings.listJoin(user.roles, ', ')}">DefaultRoles</td>
+        <td>
+            <a th:href="@{/admin/users/{userId}(userId=${user.id})}">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

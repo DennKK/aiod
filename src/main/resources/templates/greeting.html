@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="">
+<head>
+    <title>Main Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/greeting.css">
+</head>
+<body>
+<div class="container">
+    <h1>Welcome on AIOD website!</h1>
+    <p th:inline="text">Hello<span th:remove="tag" sec:authentication="name"></span>!</p>
+    <a th:href="@{/cards}">Page with AIs</a>
+    <p>Login <a th:href="@{/login}">here</a> or register <a th:href="@{/register}">here</a>.</p>
+    <div class="logout-btn" sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

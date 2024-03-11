@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Card Profile</title>
+    <link rel="stylesheet" type="text/css" href="/css/cardProfile.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="card">
+        <p>Name: <span th:text="${card.name}"></span></p>
+        <p>Description: <span th:text="${card.description}"></span></p>
+        <p>Tags:
+            <span th:each="tag : ${card.tags}">
+                <span th:text="${tag}"></span>
+            </span>
+        </p>
+        <p>Link: <a th:href="${card.link}" th:text="${card.link}"></a></p>
+    </div>
+</div>
+</body>
+
+</html>
