@@ -1,5 +1,4 @@
-package com.dennkk.aiod.repos;
-
+package com.dennkk.aiod.domain.repos;
 
 import com.dennkk.aiod.domain.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
