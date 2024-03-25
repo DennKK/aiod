@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collections;
 
-
 @Controller
 public class RegistrationController {
     private final UserRepo userRepo;
