@@ -35,14 +35,29 @@ public class CardEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserEntity author;
+    private String category;
+    private Long price;
+    private String platform;
+    private String recommendations;
+    private String instructions;
 
-    public CardEntity(String name, String preview, String description, List<String> tags, String link, UserEntity author) {
+    public CardEntity(
+            String name, String preview, String description,
+            List<String> tags, String link, UserEntity author,
+            String category, Long price, String platform,
+            String recommendations, String instructions
+    ) {
         this.name = name;
         this.description = description;
         this.preview = preview;
         this.tags = tags;
         this.author = author;
         this.link = link;
+        this.category = category;
+        this.price = price;
+        this.platform = platform;
+        this.recommendations = recommendations;
+        this.instructions = instructions;
     }
 
     public String getAuthorName() {
