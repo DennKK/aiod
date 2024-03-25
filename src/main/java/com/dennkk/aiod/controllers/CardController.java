@@ -2,7 +2,7 @@ package com.dennkk.aiod.controllers;
 
 import com.dennkk.aiod.domain.CardEntity;
 import com.dennkk.aiod.domain.UserEntity;
-import com.dennkk.aiod.repos.CardRepo;
+import com.dennkk.aiod.domain.repos.CardRepo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,15 +45,21 @@ public class CardController {
     @PostMapping("/cards/create")
     public String createCard(
             @AuthenticationPrincipal UserEntity author,
-            @RequestParam String name,
-            @RequestParam String preview,
-            @RequestParam String description,
-            @RequestParam String tags,
-            @RequestParam String link
+            @RequestParam String name, @RequestParam String preview,
+            @RequestParam String description, @RequestParam String tags,
+            @RequestParam String link, @RequestParam String category,
+            @RequestParam Long price, @RequestParam String platform,
+            @RequestParam String recommendations, @RequestParam String instructions
     ) {
         List<String> tagsList = Arrays.asList(tags.split(" "));
 
-        CardEntity newCard = new CardEntity(name, preview, description, tagsList, link, author);
+        CardEntity newCard = new CardEntity(
+                name, preview, description,
+                tagsList, link, author,
+                category, price, platform,
+                recommendations, instructions
+        );
+
         cardRepo.save(newCard);
         return "redirect:/cards";
     }
