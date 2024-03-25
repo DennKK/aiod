@@ -1,7 +1,7 @@
 package com.dennkk.aiod.controllers;
 
 import com.dennkk.aiod.domain.UserEntity;
-import com.dennkk.aiod.repos.UserRepo;
+import com.dennkk.aiod.domain.repos.UserRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
