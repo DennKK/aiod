@@ -1,4 +1,4 @@
-package com.dennkk.aiod.repos;
+package com.dennkk.aiod.domain.repos;
 
 import com.dennkk.aiod.domain.CardEntity;
 import org.springframework.data.repository.CrudRepository;
