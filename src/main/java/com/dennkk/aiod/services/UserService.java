@@ -1,6 +1,6 @@
 package com.dennkk.aiod.services;
 
-import com.dennkk.aiod.repos.UserRepo;
+import com.dennkk.aiod.domain.repos.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
