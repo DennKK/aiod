@@ -8,18 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/register")
 @RequiredArgsConstructor
 public class RegistrationController {
     private final UserService userService;
 
-    @GetMapping("/register")
+    @GetMapping
     public String registration() {
         return "registration";
     }
 
-    @PostMapping("/register")
+    @PostMapping
     public String addUser(@ModelAttribute UserEntity user, Model model) {
         if (!userService.addUser(user)) {
             model.addAttribute("message", "User already exists!");

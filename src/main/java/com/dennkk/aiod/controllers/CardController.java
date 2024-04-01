@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,11 +20,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequestMapping("/cards")
 @RequiredArgsConstructor
 public class CardController {
     private final CardService cardService;
 
-    @GetMapping("/cards")
+    @GetMapping
     public String cards(@RequestParam(required = false) String tags, Model model) {
         List<CardEntity> allCards;
         if (tags != null && !tags.isEmpty()) {
@@ -36,18 +38,18 @@ public class CardController {
         return "cards_view";
     }
 
-    @GetMapping("/cards/create")
+    @GetMapping("/create")
     public String createCard() {
         return "createCard_view";
     }
 
-    @PostMapping("/cards/create")
+    @PostMapping("create")
     public String createCard(@AuthenticationPrincipal UserEntity author, @ModelAttribute CardDto cardDto) {
         cardService.createCard(cardDto, author);
         return "redirect:/cards";
     }
 
-    @GetMapping("/cards/{id}")
+    @GetMapping("/{id}")
     public String getCard(@PathVariable Long id, Model model) {
         CardEntity card = cardService.findCardById(id);
         if (card != null) {
