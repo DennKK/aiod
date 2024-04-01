@@ -8,6 +8,10 @@
 
 <body>
 <div class="container">
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
     <div class="card">
         <p>Name: <span th:text="${card.name}"></span></p>
         <p>Description: <span th:text="${card.description}"></span></p>
@@ -23,8 +27,16 @@
         <p>Platform: <span th:text="${card.platform}"></span></p>
         <p>Recommendations: <span th:text="${card.recommendations}"></span></p>
         <p>Instructions: <span th:text="${card.instructions}"></span></p>
+
+        <form action="/like-card" method="get" style="display: inline;">
+            <input type="hidden" name="cardId" th:value="${card.id}">
+            <button type="submit" class="button-like">Like</button>
+        </form>
+        <form style="display: inline;">
+            <input type="hidden">
+            <button type="submit" class="button-dislike">Dislike</button>
+        </form>
     </div>
 </div>
 </body>
-
 </html>
