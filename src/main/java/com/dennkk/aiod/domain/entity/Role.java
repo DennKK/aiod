@@ -1,4 +1,4 @@
-package com.dennkk.aiod.domain;
+package com.dennkk.aiod.domain.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 
