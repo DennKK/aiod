@@ -7,9 +7,9 @@ body {
 
 .container {
     text-align: center;
-    margin: 50px auto; /* Центрируем блок по горизонтали */
+    margin: 50px auto;
     padding: 20px;
-    max-width: 600px; /* Ограничиваем максимальную ширину блока */
+    max-width: 600px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
