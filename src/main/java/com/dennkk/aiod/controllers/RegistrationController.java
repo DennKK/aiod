@@ -1,23 +1,18 @@
 package com.dennkk.aiod.controllers;
 
-import com.dennkk.aiod.domain.Role;
-import com.dennkk.aiod.domain.UserEntity;
-import com.dennkk.aiod.domain.repos.UserRepo;
+import com.dennkk.aiod.domain.entity.UserEntity;
+import com.dennkk.aiod.service.contracts.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
-
 @Controller
+@RequiredArgsConstructor
 public class RegistrationController {
-    private final UserRepo userRepo;
-
-    public RegistrationController(UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
+    private final UserService userService;
 
     @GetMapping("/register")
     public String registration() {
@@ -26,15 +21,10 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String addUser(@ModelAttribute UserEntity user, Model model) {
-        UserEntity userFromDb = userRepo.findByUsername(user.getUsername());
-        if (userFromDb != null) {
+        if (!userService.addUser(user)) {
             model.addAttribute("message", "User already exists!");
             return "registration";
         }
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        userRepo.save(user);
-
         return "redirect:/login";
     }
 }
