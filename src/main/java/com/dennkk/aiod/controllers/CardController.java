@@ -1,39 +1,38 @@
 package com.dennkk.aiod.controllers;
 
-import com.dennkk.aiod.domain.CardEntity;
-import com.dennkk.aiod.domain.UserEntity;
-import com.dennkk.aiod.domain.repos.CardRepo;
+import com.dennkk.aiod.domain.dto.CardDto;
+import com.dennkk.aiod.domain.entity.CardEntity;
+import com.dennkk.aiod.domain.entity.UserEntity;
+import com.dennkk.aiod.service.contracts.CardService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CardController {
-    private final CardRepo cardRepo;
-
-    public CardController(CardRepo cardRepo) {
-        this.cardRepo = cardRepo;
-    }
+    private final CardService cardService;
 
     @GetMapping("/cards")
     public String cards(@RequestParam(required = false) String tags, Model model) {
-        List<String> tagsList;
-        Iterable<CardEntity> allPosts;
-
+        List<CardEntity> allCards;
         if (tags != null && !tags.isEmpty()) {
-            tagsList = Arrays.asList(tags.split(" "));
-            allPosts = cardRepo.findByTagsIn(tagsList);
+            List<String> tagsList = Arrays.asList(tags.split(" "));
+            allCards = cardService.findCardsByTags(tagsList);
         } else {
-            allPosts = cardRepo.findAll();
+            allCards = cardService.findAllCards();
         }
-        model.addAttribute("cards", allPosts);
+        model.addAttribute("cards", allCards);
         return "cards_view";
     }
 
@@ -43,35 +42,29 @@ public class CardController {
     }
 
     @PostMapping("/cards/create")
-    public String createCard(
-            @AuthenticationPrincipal UserEntity author,
-            @RequestParam String name, @RequestParam String preview,
-            @RequestParam String description, @RequestParam String tags,
-            @RequestParam String link, @RequestParam String category,
-            @RequestParam Long price, @RequestParam String platform,
-            @RequestParam String recommendations, @RequestParam String instructions
-    ) {
-        List<String> tagsList = Arrays.asList(tags.split(" "));
-
-        CardEntity newCard = new CardEntity(
-                name, preview, description,
-                tagsList, link, author,
-                category, price, platform,
-                recommendations, instructions
-        );
-
-        cardRepo.save(newCard);
+    public String createCard(@AuthenticationPrincipal UserEntity author, @ModelAttribute CardDto cardDto) {
+        cardService.createCard(cardDto, author);
         return "redirect:/cards";
     }
 
-    @GetMapping("/card/{id}")
-    public String getPost(@PathVariable Long id, Model model) {
-
-        CardEntity card = cardRepo.findById(id).orElse(null);
+    @GetMapping("/cards/{id}")
+    public String getCard(@PathVariable Long id, Model model) {
+        CardEntity card = cardService.findCardById(id);
         if (card != null) {
             model.addAttribute("card", card);
             return "cardProfile_view";
         }
-        return "cards_view";
+        return "redirect:/cards";
+    }
+
+    @GetMapping("/like-card")
+    public String likeCard(@AuthenticationPrincipal UserEntity user, @RequestParam("cardId") Long cardId, RedirectAttributes redirectAttributes) {
+        try {
+            cardService.likeCard(user.getId(), cardId);
+            redirectAttributes.addFlashAttribute("successMessage", "Card liked successfully!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error liking card: " + e.getMessage());
+        }
+        return "redirect:/cards/" + cardId;
     }
 }
