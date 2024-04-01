@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public boolean addUser(UserEntity user) {
-        if (userRepo.findByUsername(user.getUsername()) != null) {
+        if (userRepo.findByUsername(user.getUsername()).isPresent()) {
             return false;
         }
         user.setActive(true);
