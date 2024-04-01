@@ -28,7 +28,7 @@
         <p>Recommendations: <span th:text="${card.recommendations}"></span></p>
         <p>Instructions: <span th:text="${card.instructions}"></span></p>
 
-        <form action="/like-card" method="get" style="display: inline;">
+        <form action="/cards/like-card" method="get" style="display: inline;">
             <input type="hidden" name="cardId" th:value="${card.id}">
             <button type="submit" class="button-like">Like</button>
         </form>
