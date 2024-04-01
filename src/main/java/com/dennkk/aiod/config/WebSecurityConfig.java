@@ -1,6 +1,7 @@
 package com.dennkk.aiod.config;
 
-import com.dennkk.aiod.services.UserService;
+import com.dennkk.aiod.service.implementations.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,13 +15,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
-    private final UserService userService;
-
-    public WebSecurityConfig(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserServiceImpl userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
