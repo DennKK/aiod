@@ -11,7 +11,7 @@
     <ul>
         <li th:each="role : ${roles}">
             <label>
-                <input type="checkbox"  th:name="${role}" th:text="${role}" th:checked="${user.roles.contains(role)}"/>
+                <input type="checkbox" th:name="${role}" th:text="${role}" th:checked="${user.roles.contains(role)}"/>
             </label>
         </li>
     </ul>
