@@ -17,6 +17,16 @@
         <p><strong>Lastname:</strong> <span th:text="${user.lastname}"></span></p>
     </div>
 
+    <div>
+        <p>Liked Cards</p>
+        <ul class="liked-cards-list">
+            <li th:if="${user.likedCards.isEmpty()}">No liked cards yet.</li>
+            <li th:each="card : ${user.likedCards}">
+                <a th:href="@{'/cards/' + ${card.id}}" th:text="${card.name}"></a>
+            </li>
+        </ul>
+    </div>
+
     <a href="#" class="btn btn-primary">Edit Profile</a>
 </div>
 
