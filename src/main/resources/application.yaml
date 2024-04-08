@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/aiod
-    username: test12345
-    password: test12345
+    url: jdbc:postgresql://localhost:5432/aiod_db
+    username: postgres
+    password: postgres
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -11,6 +12,12 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    default-schema: public
 
 logging:
   level:
