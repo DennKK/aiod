@@ -11,13 +11,13 @@ services:
       - service-db
     environment:
       - SERVER_PORT=8181
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/cards_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/aiod_db
 
   service-db:
     image: postgres:16
     environment:
-      POSTGRES_USER: username
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "15432:5432"
     volumes:
