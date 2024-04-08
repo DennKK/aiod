@@ -1,55 +1,53 @@
-# AI Odyssey Project Setup Guide
+# Руководство по настройке проекта AI Odyssey
 
-Welcome to the **AI Odyssey** project setup guide! This step-by-step tutorial is designed for users with limited programming experience. Follow the instructions below to get the project up and running on your machine.
+Добро пожаловать в руководство по настройке проекта **AI Odyssey**! Этот пошаговый учебник предназначен для пользователей с ограниченным опытом программирования. Следуйте инструкциям ниже, чтобы запустить проект на вашем компьютере.
 
-## Step 1: Download the Project
+## Шаг 1: Загрузка проекта
 
-1. Visit the project's GitHub page.
-2. Click on the `Code` button.
-3. Select `Download ZIP` from the dropdown menu.
-4. Save the ZIP file to your computer and extract it to a location of your choice.
+1. Посетите страницу проекта на GitHub.
+2. Нажмите кнопку `Code`.
+3. Выберите `Download ZIP` из выпадающего меню.
+4. Сохраните ZIP-файл на свой компьютер и извлеките его в место по вашему выбору.
 
-## Step 2: Open the Project
+## Шаг 2: Открытие проекта
 
-Open the project directory using a text editor or an Integrated Development Environment (IDE) such as Visual Studio Code or Atom.
+Откройте директорию проекта с помощью текстового редактора или интегрированной среды разработки (IDE), такой как Visual Studio Code или Atom.
 
-## Step 3: Install Docker Desktop
+## Шаг 3: Установка Docker Desktop
 
-1. Navigate to [docker.com](https://www.docker.com/products/docker-desktop) and download Docker Desktop for your operating system.
-2. Follow the installer's instructions to install Docker Desktop on your system.
+1. Перейдите на [docker.com](https://www.docker.com/products/docker-desktop) и загрузите Docker Desktop для вашей операционной системы.
+2. Следуйте инструкциям установщика, чтобы установить Docker Desktop на вашу систему.
 
-## Step 4: Open the Project Terminal
+## Шаг 4: Открытие терминала проекта
 
-Within your development environment, open the built-in terminal. Ensure the terminal's current directory is set to the root of your project.
+В вашей среде разработки откройте встроенный терминал. Убедитесь, что текущий каталог терминала установлен в корень вашего проекта.
 
-## Step 5: Run Docker Compose
+## Шаг 5: Запуск Docker Compose
 
-Execute the following command in the terminal: 
+Выполните следующую команду в терминале:
 
 ```bash
 docker-compose up
 ```
 
-This command will start all the necessary Docker containers as defined in your project's `docker-compose.yml` file.
+## Шаг 6: Ожидание завершения сборки
 
-## Step 6: Await Build Completion
+Процесс сборки и запуска ваших контейнеров Docker может занять некоторое время, особенно при первом запуске. Следите за выводом в терминале, чтобы контролировать процесс. Сборка завершена, когда вывод в терминале замедляется, и логи указывают на то, что сервисы запущены.
 
-The process of building and launching your Docker containers can take some time, especially on the first run. Keep an eye on the terminal output to monitor the progress. The build is complete when the terminal output slows and logs indicate that services are running.
+## Шаг 7: Доступ к проекту в браузере
 
-## Step 7: Access the Project in a Browser
+После успешного запуска контейнеров Docker:
 
-After the Docker containers have been successfully started:
+1. Откройте любой веб-браузер.
+2. Введите `localhost:8181` или `http://localhost:8181` в адресную строку.
+3. Нажмите Enter, и вы должны увидеть приветственную страницу проекта или пользовательский интерфейс.
 
-1. Open any web browser.
-2. Type `localhost:8181` or `http://localhost:8181` into the address bar.
-3. Hit Enter, and you should be greeted by the project's landing page or user interface.
+## Дополнительная информация
 
-## Additional Information
+- **Проблемы с входом в Docker**: Если вы столкнулись с ошибками, связанными с Docker, убедитесь, что вы вошли в свою учетную запись Docker. Docker Desktop может требовать входа в систему для загрузки и управления контейнерами.
 
-- **Docker Login Issues**: If you face any errors related to Docker, make sure you are logged into your Docker account. Docker Desktop may require you to sign in to download and manage containers.
+- **Проверка доступности порта**: Перед началом убедитесь, что порт `8181` не используется другим приложением. Если это так, или если вы столкнулись с ошибкой конфликта портов, вы можете изменить конфигурацию порта в файле `docker-compose.yml` на свободный порт и получить доступ к приложению через этот порт.
 
-- **Checking Port Availability**: Before starting, ensure that port `8181` is not being used by another application. If it is, or if you encounter a port conflict error, you can change the port configuration in the `docker-compose.yml` file to a free port and access the application via that port instead.
+- **Документация и помощь**: Для более полного руководства официальная документация Docker являются бесценным ресурсом. Кроме того, если у вас возникли проблемы или вопросы, страница вопросов проекта на GitHub - хорошее место для поиска помощи.
 
-- **Documentation and Help**: For more comprehensive guidance, the Docker and Docker Compose official documentation are invaluable resources. Additionally, if you run into issues or have questions, the project's GitHub issues page is a good place to seek help.
-
-Congratulations on setting up the **AI Odyssey** project! Dive into its features and functionalities. Should you encounter any stumbling blocks or have queries, do not hesitate to reach out to the project's maintainers or consult the project's GitHub issue tracker for assistance.
+Поздравляем с настройкой проекта **AI Odyssey**!
