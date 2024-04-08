@@ -1,1 +1,1 @@
-create database cards_db;
+create database aiod_db;
